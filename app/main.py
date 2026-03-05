@@ -6,11 +6,11 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from .config import settings
 from .logging_config import configure_logging
 from .dependencies import get_correlation_id, get_llm_client
+from .llm.llm_client import LLMClient
 from .agents.planning_agent import PlanningAgent
 from .agents.analysis_agent import AnalysisAgent
 from .models.plan_models import PlanningRequest
 from .models.analysis_models import AnalysisRequest
-
 
 configure_logging()
 logger = logging.getLogger(__name__)
