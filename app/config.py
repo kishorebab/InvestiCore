@@ -1,17 +1,13 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    """Application configuration loaded from environment variables."""
-
-    app_name: str = "AI Agent Service"
+    app_name: str = "ai-agent"
     log_level: str = "INFO"
-    llm_provider: str = "local"
+    llm_provider: str = "ollama"
+    ollama_base_url: str = "http://localhost:11434"
+    ollama_model: str = "phi3"
 
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8"
-    )
-
+    class Config:
+        env_file = ".env"
 
 settings = Settings()

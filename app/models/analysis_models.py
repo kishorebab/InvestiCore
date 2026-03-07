@@ -1,3 +1,7 @@
+from pydantic import BaseModel, Field
+from typing import Literal
+
+
 class ToolResultItem(BaseModel):
     toolName: str
     status: Literal["success", "failed", "timeout"]
@@ -5,9 +9,11 @@ class ToolResultItem(BaseModel):
     errorMessage: str | None = None
     durationMs: int
 
+
 class AnalysisRequest(BaseModel):
     userQuery: str
-    toolResults: list[ToolResultItem]  # TYPED, not just dict
+    toolResults: list[ToolResultItem]
+
 
 class AnalysisResponse(BaseModel):
     rootCause: str

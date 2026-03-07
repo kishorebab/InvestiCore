@@ -1,14 +1,22 @@
 from typing import Any
+from pydantic import ValidationError
 
-from ..models.plan_models import PlanningResponse, validate_planning_response
-from ..models.analysis_models import AnalysisResponse, validate_analysis_response
+from ..models.plan_models import PlanningResponse
+from ..models.analysis_models import AnalysisResponse
 
 
 class SchemaValidator:
+
     @staticmethod
     def validate_planning(raw: Any) -> PlanningResponse:
-        return validate_planning_response(raw)
+        try:
+            return PlanningResponse(**raw)
+        except ValidationError as e:
+            raise ValueError(f"Invalid planning response schema: {e}")
 
     @staticmethod
     def validate_analysis(raw: Any) -> AnalysisResponse:
-        return validate_analysis_response(raw)
+        try:
+            return AnalysisResponse(**raw)
+        except ValidationError as e:
+            raise ValueError(f"Invalid analysis response schema: {e}")
